@@ -57,8 +57,7 @@ session_start();
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <h5 class="text-white my-4">Maternal Health</h5>
-                                    <h5 class="text-white my-4">Record</h5>
+                                    <h5 class="text-white my-4">Maternal Health Record</h5>
                                 </div>
                                 <div class="col-md-4">
                                     <a href="maternal_health.php"><i class="fa fa-procedures fa-3x my-4"style="color: white;"></i></a>

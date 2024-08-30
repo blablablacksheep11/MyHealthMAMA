@@ -16,7 +16,7 @@
     $doctorUsername = $_SESSION['username'];
 
     // Fetch feedback messages for the logged-in doctor
-    $feedbackQuery = "SELECT title, description, sender_username FROM feedback WHERE doctor_username = '$doctorUsername'";
+    $feedbackQuery = "SELECT title, description, sender_username FROM feedback";
     $feedbackResult = mysqli_query($connect, $feedbackQuery);
 
     if (!$feedbackResult) {

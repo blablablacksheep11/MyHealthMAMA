@@ -150,7 +150,7 @@ if (isset($_POST['nurse_login'])) {
         .content h3 {
             font-size: 3rem;
             color: var(--black);
-            margin-bottom: 30rem;
+            margin-bottom: 25rem;
         }
 
         .content h3 span {
@@ -220,7 +220,7 @@ if (isset($_POST['nurse_login'])) {
 
         .form-container {
             position: fixed;
-            top: 50%;
+            top: 55%;
             left: 27%;
             transform: translate(-50%, -50%);
             z-index: 10; /* Ensure it stays on top */

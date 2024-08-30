@@ -165,7 +165,7 @@ if (isset($_POST['search'])) {
                                 echo "<select class='form-control' id='videoFormat-$motherUsername' onchange='showVideo(this.value, \"$motherUsername\")'>";
                                 echo "<option value='' disabled selected>Select Video </option>";
                                 foreach ($videoPaths as $video) {
-                                    $filePath = $video['path'];
+                                    $filePath = $video['path']; 
                                     $fileName = $video['name'];
                                     echo "<option value='$filePath'>$fileName</option>";
                                 }
