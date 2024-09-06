@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 include("../include/header.php");
 include("../include/connection.php");
+$motherid = $_SESSION["mother_id"];
 
 if (!isset($_SESSION['mother_username'])) {
     // Redirect to login page if mother is not logged in
@@ -64,7 +65,7 @@ $motherUsername = $_SESSION['mother_username'];
                     <div class="row">
                     <?php
                         // Fetch uploaded videos for the logged-in mother from nurse/uploads and display them
-                        $videoQuery = "SELECT video_path FROM videos WHERE mother_name = '$motherUsername'";
+                        $videoQuery = "SELECT video_path FROM videos WHERE mother_id = '$motherid'";
                         $videoResult = mysqli_query($connect, $videoQuery);
                         if (!$videoResult) {
                             die("Query failed: " . mysqli_error($connect));

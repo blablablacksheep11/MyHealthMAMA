@@ -11,9 +11,11 @@ $mother = $_SESSION['mother'];
 
 if (isset($_POST['change_uname'])) {
     $uname = $_POST['uname'];
-    $_SESSION['mother'] = $uname;
     $query = "UPDATE mothers SET username='$uname' WHERE username='$mother'";
     $res = mysqli_query($connect, $query);
+    $query = "UPDATE feedback SET sender_username='$uname' WHERE sender_username='$mother'";
+    $res = mysqli_query($connect, $query);
+    $_SESSION['mother'] = $uname;
     echo "<script>window.location.href='../mother/profile.php';</script>";
 }
 ?>

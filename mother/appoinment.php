@@ -6,9 +6,10 @@ ini_set('display_errors', 1);
 include("../include/header.php");
 include("../include/connection.php");
 
+$motherid = (int)$_SESSION["mother_id"];
 
 // Fetch appointments for the logged-in mother
-$appointmentQuery = "SELECT * FROM appointments WHERE mother_name = '{$_SESSION['username']}'";
+$appointmentQuery = "SELECT * FROM appointments WHERE mother_id = '$motherid'";
 $appointmentResult = mysqli_query($connect, $appointmentQuery);
 if (!$appointmentResult) {
     die("Query failed: " . mysqli_error($connect));
