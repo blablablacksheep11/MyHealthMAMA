@@ -15,11 +15,14 @@ if (isset($_POST['mother_login'])) {
     } else {
         $query = "SELECT * FROM mothers WHERE username='$uname' AND password='$pass'";
         $res = mysqli_query($connect, $query);
+        $valuereturned = mysqli_fetch_assoc($res);
+        $_SESSION['mother_id'] = $valuereturned["id"];
 
         if (mysqli_num_rows($res) == 1) {
             $_SESSION['mother'] = $uname;
             $_SESSION['username'] = $uname;
             $_SESSION['mother_username'] = $uname;
+            
             header("Location: mother/index.php");
             exit();
         } else {

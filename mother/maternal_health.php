@@ -42,10 +42,11 @@ ini_set('display_errors', 1);
 
 include("../include/header.php");
 include("../include/connection.php");
+$motherid = (int)$_SESSION['mother_id'];
 
 
 // Fetch weight data for the current mother
-$weightQuery = "SELECT * FROM weight_measurements WHERE mother_name = '{$_SESSION['username']}'";
+$weightQuery = "SELECT * FROM weight_measurements WHERE mother_id = '$motherid'";
 $result = mysqli_query($connect, $weightQuery);
 if (!$result) {
     die("Query failed: " . mysqli_error($connect));
