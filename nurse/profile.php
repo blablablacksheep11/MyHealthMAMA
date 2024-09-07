@@ -1,6 +1,22 @@
 <?php
 session_start();
 error_reporting(0);
+include("../include/connection.php");
+include("../include/header.php");
+
+if (isset($_POST['change_uname'])) {
+    $uname = $_POST['uname'];
+
+    if (empty($uname)) {
+
+    }else {
+        $nurse = $_SESSION['nurse'];
+        $query = "UPDATE nurses SET username='$uname' WHERE username='$nurse'";
+        $res = mysqli_query($connect, $query);  
+        $_SESSION['nurse'] = $uname;
+        header("Location: ".$_SERVER['PHP_SELF']);
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -17,12 +33,6 @@ error_reporting(0);
 </head>
 <body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
 
-    <?php
-    include("../include/header.php");
-
-    
-    ?>
-
     <div class="container-fluid">
         <div class="col-md-12">
             <div class="row">
@@ -30,7 +40,6 @@ error_reporting(0);
                     <?php 
                     
                     include("sidenav.php");
-                    include("../include/connection.php");
 
                     ?>
                 </div>
@@ -89,29 +98,8 @@ error_reporting(0);
                             </div>
                             <div class="col-md-6">
                             <h5 class="text-center my2">Change Username</h5>
-                            <?php
-
-                            if (isset($_POST['change_uname'])) {
-                                $uname = $_POST['uname'];
-
-                                if (empty($uname)) {
-
-                                }else {
-                                    $query = "UPDATE nurses SET username='$uname' WHERE username='$nurse'";
-
-                                    $res = mysqli_query($connect, $query);  
-
-                                    if($res) {
-                                        $_SESSION['nurse'] = $uname;
-                                    }
-                                }
-                            }
-
-
-
-
-                            ?>
-                            <form method="post">
+                           
+                            <form action="../nurse/profile.php" method="post">
                                 <label>Change Username</label>
                                 <input type="text" name="uname" class="form-control" autocomplete="off" placeholder="Enter Username">
                                 <br>

@@ -29,14 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
         $mail->SMTPAuth = true;
-        $mail->Username = 'leeanson3324@gmail.com'; // SMTP username
-        $mail->Password = 'imtyycmsivntdjuk'; // SMTP password
+        $mail->Username = 'lamyongqin@gmail.com'; // SMTP username
+        $mail->Password = 'wnwsewrlkwkmogil'; // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
 
         // Sender info
-        $mail->setFrom('leeanson3324@gmail.com', 'Nurse Dashboard');
+        $mail->setFrom('lamyongqin@gmail.com', 'Nurse Dashboard');
 
         // Add recipients
         foreach ($recipient_emails as $email) {

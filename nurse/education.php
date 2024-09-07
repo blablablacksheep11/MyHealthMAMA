@@ -25,8 +25,11 @@ if (isset($_POST['submit']) && isset($_FILES['videoFile'])) {
             move_uploaded_file($tmpName, $videoUploadPath);
 
             // Insert the video path and original name into the database
-            $sql = "INSERT INTO videos (mother_name, video_path, original_name) 
-                    VALUES ('$motherUsername', '$newVideoName', '$videoName')";
+            $getmotherid = "SELECT id FROM mothers WHERE username = '$motherUsername'";
+            $result = mysqli_query($connect, $getmotherid);
+            $motherid = mysqli_fetch_column($result);
+            $sql = "INSERT INTO videos (mother_id, mother_name, video_path, original_name) 
+                    VALUES ('$motherid', '$motherUsername', '$newVideoName', '$videoName')";
             mysqli_query($connect, $sql);
 
             // Display alert message on successful upload

@@ -15,6 +15,8 @@ if (isset($_POST['change_uname'])) {
     $res = mysqli_query($connect, $query);
     $query = "UPDATE feedback SET sender_username='$uname' WHERE sender_username='$mother'";
     $res = mysqli_query($connect, $query);
+    $query = "UPDATE videos SET mother_name='$uname' WHERE mother_name='$mother'";
+    $res = mysqli_query($connect, $query);
     $_SESSION['mother'] = $uname;
     header("Location: ".$_SERVER['PHP_SELF']);
 }
