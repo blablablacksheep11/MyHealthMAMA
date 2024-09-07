@@ -16,7 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insert appointment data into database if input is not empty
     if (!empty($motherUsername) && !empty($appointmentDate) && !empty($appointmentTime) && !empty($doctorUsername)) {
-        $insertQuery = "INSERT INTO appointments (mother_name, appointment_date, appointment_time, doctor_name) VALUES ('$motherUsername', '$appointmentDate', '$appointmentTime', '$doctorUsername')";
+        $getmotherid = "SELECT id FROM mothers WHERE username='$motherUsername'";
+        $result = mysqli_query($connect, $getmotherid);
+        $motherid = mysqli_fetch_column($result);
+        $insertQuery = "INSERT INTO appointments (mother_id, appointment_date, appointment_time, doctor_name) VALUES ('$motherid', '$appointmentDate', '$appointmentTime', '$doctorUsername')";
         if (mysqli_query($connect, $insertQuery)) {
             echo "<script>alert('New appointment created successfully');</script>";
         } else {
@@ -149,7 +152,11 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                                         $formattedTime = date("g:i A", strtotime($row['appointment_time']));
                                         echo "<tr>";
                                         echo "<td>" . $row['id'] . "</td>"; // Display appointment ID
-                                        echo "<td>" . $row['mother_name'] . "</td>";
+                                        $currentmotherid = $row['mother_id'];
+                                        $getmothername = "SELECT username FROM mothers WHERE id='$currentmotherid'";
+                                        $result = mysqli_query($connect, $getmothername);
+                                        $mothername = mysqli_fetch_column($result);
+                                        echo "<td>" . $mothername . "</td>";
                                         echo "<td>" . $row['appointment_date'] . "</td>";
                                         echo "<td>" . $formattedTime . "</td>";
                                         echo "<td>" . $row['doctor_name'] . "</td>";
