@@ -16,7 +16,7 @@ if (isset($_POST['change_uname'])) {
     $query = "UPDATE feedback SET sender_username='$uname' WHERE sender_username='$mother'";
     $res = mysqli_query($connect, $query);
     $_SESSION['mother'] = $uname;
-    echo "<script>window.location.href='../mother/profile.php';</script>";
+    header("Location: ".$_SERVER['PHP_SELF']);
 }
 ?>
 

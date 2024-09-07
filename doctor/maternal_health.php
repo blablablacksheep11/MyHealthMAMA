@@ -25,12 +25,15 @@ if (isset($_POST['selectMother'])) {
     $selectedMother = $_POST['selectedMother'];
     
     // Retrieve weight data based on mother_name (which is the same as username)
-    $weightQuery = "SELECT * FROM weight_measurements WHERE mother_name = '$selectedMother'";
-    $result = mysqli_query($connect, $weightQuery);
+    $getmotherid = "SELECT id FROM mothers WHERE username = '$selectedMother'";
+    $result = mysqli_query($connect, $getmotherid);
+    $motherid = (int)mysqli_fetch_column($result);
+    $weightQuery = "SELECT * FROM weight_measurements WHERE mother_id = '$motherid' ORDER BY date";
+    $result2 = mysqli_query($connect, $weightQuery);
     if (!$result) {
         die("Query failed: " . mysqli_error($connect));
     }
-    while ($row = mysqli_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result2)) {
         // Convert date format for HTML input
         $row['date'] = date('Y-m-d', strtotime($row['date']));
         $weightData[] = $row;
@@ -42,9 +45,12 @@ if(isset($_POST['inputDate']) && isset($_POST['inputWeight']) && isset($_POST['m
     $inputDate = $_POST['inputDate'];
     $inputWeight = $_POST['inputWeight'];
     $motherUsername = $_POST['motherUsername'];
+    $getmotherid = "SELECT id FROM mothers WHERE username = '$motherUsername'";
+    $result = mysqli_query($connect, $getmotherid);
+    $motherid = (int)mysqli_fetch_column($result);
 
     // Insert data into the database
-    $insertQuery = "INSERT INTO weight_measurements (mother_name, date, weight) VALUES ('$motherUsername', '$inputDate', '$inputWeight')";
+    $insertQuery = "INSERT INTO weight_measurements (mother_id, date, weight) VALUES ('$motherid', '$inputDate', '$inputWeight')";
     $insertResult = mysqli_query($connect, $insertQuery);
     if($insertResult) {
         // Data inserted successfully
@@ -55,6 +61,14 @@ if(isset($_POST['inputDate']) && isset($_POST['inputWeight']) && isset($_POST['m
         // Error occurred during insertion
         echo "Error: " . mysqli_error($connect);
     }
+}
+
+//handdle record deletion
+if(isset($_POST["removeRecord"])){
+        $recordid = $_POST["removeRecord"];
+        $deleteQuery = "DELETE FROM weight_measurements WHERE id = '$recordid'";
+        mysqli_query($connect, $deleteQuery);
+        header("Location: ".$_SERVER['PHP_SELF']);
 }
 
 ?>
@@ -68,7 +82,7 @@ if(isset($_POST['inputDate']) && isset($_POST['inputWeight']) && isset($_POST['m
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Chart.js -->
-    <script src="https://cdnjs.cloudflare.com//libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <style>
         html, body {
             height: 100%;
@@ -159,9 +173,8 @@ if(isset($_POST['inputDate']) && isset($_POST['inputWeight']) && isset($_POST['m
                                                         <td><?php echo $data['date']; ?></td>
                                                         <td><?php echo $data['weight']; ?></td>
                                                         <td>
-                                                            <form method="post" onsubmit="return confirm('Are you sure you want to remove this record?');">
-                                                                <input type="hidden" name="record_id" value="<?php echo $data['id']; ?>">
-                                                                <button type="submit" class="btn btn-danger btn-sm" name="removeRecord">Remove</button>
+                                                            <form action="../doctor/maternal_health.php" method="post">
+                                                                <button type="submit" class="btn btn-danger btn-sm" name="removeRecord" value="<?php echo $data['id']; ?>">Remove</button>
                                                             </form>
                                                         </td>
                                                     </tr>
@@ -179,7 +192,7 @@ if(isset($_POST['inputDate']) && isset($_POST['inputWeight']) && isset($_POST['m
     </div>
 
     <!-- JavaScript to update chart -->
-    <?php if (!empty($weightData)): ?>
+    <?php if (!empty($weightData)){ ?>
         <script>
             // Initialize the weight chart
             var ctx = document.getElementById('weightChart').getContext('2d');
@@ -208,7 +221,7 @@ if(isset($_POST['inputDate']) && isset($_POST['inputWeight']) && isset($_POST['m
                 }
             });
         </script>
-    <?php endif; ?>
+    <?php } ?>
 
 </body>
 </html>

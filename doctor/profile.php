@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-
+include("../include/connection.php");
 ?>
 <!DOCTYPE html>
 <head>
@@ -30,7 +30,6 @@ error_reporting(0);
                     <?php 
                     
                     include("sidenav.php");
-                    include("../include/connection.php");
 
                     ?>
                 </div>
@@ -45,6 +44,7 @@ error_reporting(0);
                             $query = "SELECT * FROM doctors WHERE username='$doc'";
                             $res = mysqli_query($connect, $query);
                             $row = mysqli_fetch_array($res);
+                            $doctorid = $row["id"];
 
                             ?>
 
@@ -97,12 +97,14 @@ error_reporting(0);
                                 if (empty($uname)) {
 
                                 }else {
-                                    $query = "UPDATE doctors SET username='$uname' WHERE username='$doc'";
-
-                                    $res = mysqli_query($connect, $query);  
+                                    $query = "UPDATE doctors SET username='$uname' WHERE id='$doctorid'";
+                                    $res = mysqli_query($connect, $query); 
+                                    $query = "UPDATE appointments SET doctor_name='$uname' WHERE doctor_name='$doc'";
+                                    $res2 = mysqli_query($connect, $query);  
 
                                     if($res) {
                                         $_SESSION['doctor'] = $uname;
+                                        header("Location: ".$_SERVER['PHP_SELF']);
                                     }
                                 }
                             }
