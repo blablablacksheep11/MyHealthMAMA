@@ -7,7 +7,7 @@ include("../include/header.php");
 include("../include/connection.php");
 
 // Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST["addbutton"])) {
     // Get input data if set
     $motherUsername = isset($_POST['motherUsername']) ? $_POST['motherUsername'] : '';
     $appointmentDate = isset($_POST['appointmentDate']) ? $_POST['appointmentDate'] : '';
@@ -27,16 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Handle appointment deletion
-    if (isset($_POST['deleteAppointment'])) {
-        $appointmentId = $_POST['deleteAppointment'];
-        $deleteQuery = "DELETE FROM appointments WHERE id = '$appointmentId'";
-        if (mysqli_query($connect, $deleteQuery)) {
-            echo "<script>alert('Appointment deleted successfully');</script>";
-        } else {
-            echo "Error: " . $deleteQuery . "<br>" . mysqli_error($connect);
-        }
-    }
+    
 }
 
 // Fetch list of mothers' usernames from the database
@@ -123,7 +114,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                                         ?>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Create Appointment</button>
+                                <button type="submit" class="btn btn-primary" id="addbutton">Create Appointment</button>
                             </form>
                         </div>
                         <!-- Display appointment data in table -->
@@ -160,7 +151,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                                         echo "<td>" . $row['appointment_date'] . "</td>";
                                         echo "<td>" . $formattedTime . "</td>";
                                         echo "<td>" . $row['doctor_name'] . "</td>";
-                                        echo "<td><button class='btn btn-danger btn-sm remove-appointment' data-appointment-id='".$row['id']."'>Remove</button></td>"; // Pass appointment ID as data attribute
+                                        echo "<td><button class='btn btn-danger btn-sm remove-appointment' id='remove-appointment' value='".$row['id']."'>Remove</button></td>"; // Pass appointment ID as data attribute
                                         echo "</tr>";
                                     }
                                     ?>
@@ -179,25 +170,59 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
 <script>
     $(document).ready(function() {
         // Add event listener to dynamically added remove buttons
-        $(document).on("click", ".remove-appointment", function() {
+        $(document).on("click", "#remove-appointment", function(e) {
+            e.preventDefault();
             // Retrieve the appointment ID associated with the button
-            var appointmentId = $(this).data("appointment-id");
+            var appointmentId = $(this).val();
             // Ask for confirmation before deletion
             if (confirm("Are you sure you want to remove this record?")) {
                 // Send AJAX request to delete appointment
                 $.ajax({
-                    url: "appoinment.php", // Use the same file for handling deletion
+                    url: "delete-appointment.php", // Use the same file for handling deletion
                     method: "POST",
                     data: { deleteAppointment: appointmentId }, // Pass the appointment ID to delete
                     success: function(response) {
                         // Reload the page after successful deletion
                         location.reload();
+                        alert("Record deleted");
                     },
                     error: function(xhr, status, error) {
                         // Handle errors
                         console.error(xhr.responseText);
                     }
                 });
+            }
+        });
+        
+        $(document).on("click", "#addbutton", function(e) {
+            e.preventDefault();
+            
+            var motherusername = $("#motherUsername").val();
+            var appointmentdate = $("#appointmentDate").val();
+            var appointmenttime = $("#appointmentTime").val();
+            var doctorusername = $("#doctorUsername").val();
+                // Send AJAX request to delete appointment
+                if(appointmenttime.length>0 && appointmentdate.length>0){
+                $.ajax({
+                    url: "add-appointment.php",
+                    method: "POST",
+                    data: {
+                        motherusername: motherusername,
+                        appointmentdate: appointmentdate,
+                        appointmenttime: appointmenttime,
+                        doctorusername: doctorusername
+                    }, 
+                    success: function(response) {
+                        location.reload();
+                        alert("Record added");
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors
+                        console.error(xhr.responseText);
+                    }
+                });
+            }else{
+                alert("Please provide the correct information");
             }
         });
     });
