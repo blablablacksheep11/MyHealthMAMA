@@ -1,5 +1,22 @@
 <?php
+include("../include/connection.php");
 session_start();
+
+if (isset($_POST['change'])){
+    $uname = $_POST['uname'];
+    
+    if (empty($uname)) {
+    }else{
+        $ad = $_SESSION['admin'];
+        $getadminid = "SELECT id FROM admin WHERE username='$ad'";
+        $result = mysqli_query($connect, $getadminid);
+        $adminid = mysqli_fetch_column($result);
+        $query = "UPDATE admin SET username='$uname' WHERE id='$adminid'";
+        $res = mysqli_query($connect,$query);
+        $_SESSION['admin'] = $uname;
+        header("Location:".$_SERVER['PHP_SELF']);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +55,6 @@ session_start();
 
 <?php
 include("../include/header.php");
-include("../include/connection.php");
 
 $ad = $_SESSION['admin'];
 $query = "SELECT * from admin WHERE username='$ad'";
@@ -73,6 +89,7 @@ while ($row =mysqli_fetch_array($res)){
                                     $result = mysqli_query($connect,$query);
                                     if ($result) {
                                         move_uploaded_file($_FILES['profile']['tmp_name'],"img/$profileName");
+                                        header("Location:".$_SERVER["PHP_SELF"]);
                                     }
                                 }
                             }
@@ -93,24 +110,7 @@ while ($row =mysqli_fetch_array($res)){
                             </form>
                         </div>
                         <div class="col-md-6">
-                        <?php
-                                    if (isset($_POST['change'])){
-                                        $uname = $_POST['uname'];
-                                        
-                                        if (empty($uname)) {
-
-                                        }else{
-                                            $query = "UPDATE admin SET username='$uname' WHERE username='$ad'";
-
-                                            $res = mysqli_query($connect,$query);
-
-                                            if ($res) {
-
-                                                $_SESSION['admin'] = $uname;
-                                            }
-                                        }
-                                    }
-                                ?>
+                       
                                     <form method="post">
                                         <label>Change Username</label>
                                         <input type="text" name="uname" class="form-control" autocomplete="off"><br>

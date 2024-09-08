@@ -73,7 +73,7 @@ if (isset($_POST['doctor_login'])) {
     }
 
     if (count($error) == 0) {
-        $query = "SELECT * FROM doctors WHERE username='$username' AND password='$password'";
+        $query = "SELECT * FROM doctors WHERE username='$username' AND password='$password' AND status='Approved'";
         $result = mysqli_query($connect, $query);
         $row = mysqli_fetch_assoc($result);
 
@@ -101,7 +101,7 @@ if (isset($_POST['nurse_login'])) {
     }
 
     if (count($error) == 0) {
-        $query = "SELECT * FROM nurses WHERE username='$username' AND password='$password'";
+        $query = "SELECT * FROM nurses WHERE username='$username' AND password='$password' AND status='Approved'";
         $result = mysqli_query($connect, $query);
         $row = mysqli_fetch_assoc($result);
 

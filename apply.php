@@ -43,7 +43,7 @@ if (isset($_POST['apply'])) {
 
             echo "<script>alert('You have successfully registered')</script>";
 
-            header("Location: doctorlogin.php");
+            header("Location: index.php");
 
         }else{
                 echo "<script>alert('Failed to register')</script>";

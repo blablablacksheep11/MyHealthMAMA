@@ -1,5 +1,58 @@
 <?php
 session_start();
+include("../include/connection.php");
+if (isset($_GET['id'])){
+    $id = $_GET['id'];
+
+    $query = "DELETE FROM admin WHERE id='$id'";
+    $res=mysqli_query($connect, $query);
+    if($res){
+        header("Location:".$_SERVER["PHP_SELF"]);
+    }
+}
+
+if (isset($_POST['add'])) {
+
+    $uname = $_POST['uname'];
+    $pass = $_POST['pass'];
+    $image = $_FILES['img']['name'];
+
+    $error = array();
+
+    if (empty($uname)) {
+        $error['u'] = "Enter Admin Username";
+    } else if (empty($pass)){
+        $error['u'] = "Enter Admin Password";
+    } else if (empty($image)){
+        $error['u'] = "Add Admin Picture";
+    }
+
+    if (count($error)==0) {
+
+        $name = $uname;
+        $password = $pass;  
+
+        $q = "INSERT INTO admin(username,password,profile)
+        VALUES('$name', '$password','$image')";
+
+        $result = mysqli_query($connect,$q);
+
+        if($result){
+            move_uploaded_file($_FILES['img']['tmp_name'],"img/$image");
+            header("Location:".$_SERVER["PHP_SELF"]);
+        } else {
+
+        }
+    }              
+}
+
+if (isset($error['u'])) {
+    $er = $error['u'];
+
+    $show = "<h5 class='text-center alert alert-danger'>$er</h5>";
+} else {
+    $show = "";
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +89,6 @@ include("../include/header.php");
             <div class="col-md-2" style="margin-left: -30px;">
                 <?php
                 include("sidenav.php");
-                include("../include/connection.php");
                 ?>
 
             </div>
@@ -84,65 +136,13 @@ include("../include/header.php");
 
                             echo $output;
 
-                            if (isset($_GET['id'])){
-                                $id = $_GET['id'];
-
-                                $query = "DELETE FROM admin WHERE id='$id'";
-                                mysqli_query($connect, $query);
-                            }
-
                             ?>
 
 
                         </div>
                         <div class="col-md-6">
                             <h5 class="text-center">Add Admin</h5>
-                            <?php 
-
-                            if (isset($_POST['add'])) {
-
-                                $uname = $_POST['uname'];
-                                $pass = $_POST['pass'];
-                                $image = $_FILES['img']['name'];
-
-                                $error = array();
-
-                                if (empty($uname)) {
-                                    $error['u'] = "Enter Admin Username";
-                                } else if (empty($pass)){
-                                    $error['u'] = "Enter Admin Password";
-                                } else if (empty($image)){
-                                    $error['u'] = "Add Admin Picture";
-                                }
-
-                                if (count($error)==0) {
-
-                                    $name = $uname;
-                                    $password = $pass;  
-
-                                    $q = "INSERT INTO admin(username,password,profile)
-                                    VALUES('$name', '$password','$image')";
-
-                                    $result = mysqli_query($connect,$q);
-
-                                    if($result){
-                                        move_uploaded_file($_FILES['img']['tmp_name'],"img/$image");
-
-                                    } else {
-
-                                    }
-                                }              
-                            }
-
-                            if (isset($error['u'])) {
-                                $er = $error['u'];
-
-                                $show = "<h5 class='text-center alert alert-danger'>$er</h5>";
-                            } else {
-                                $show = "";
-                            }
-                            ?>
-
+                        
                             <form method="post" enctype="multipart/form-data">
                                 <div>
                                     <?php echo $show; ?>
