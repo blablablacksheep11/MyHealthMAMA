@@ -2,6 +2,26 @@
 session_start();
 error_reporting(0);
 include("../include/connection.php");
+
+if (isset($_POST['change_uname'])) {
+    $uname = $_POST['uname'];
+
+    if (empty($uname)) {
+
+    }else {
+        $doc = $_SESSION['doctor'];
+        $getdoctorid = "SELECT id FROM doctors WHERE username='$doc'";
+        $result = mysqli_query($connect, $getdoctorid);
+        $doctorid = mysqli_fetch_column($result);
+        $query = "UPDATE doctors SET username='$uname' WHERE id='$doctorid'";
+        $res = mysqli_query($connect, $query); 
+        $query = "UPDATE appointments SET doctor_name='$uname' WHERE doctor_name='$doc'";
+        $res2 = mysqli_query($connect, $query);  
+            $_SESSION['doctor'] = $uname;
+            header("Location: ".$_SERVER['PHP_SELF']);
+        
+    }
+}
 ?>
 <!DOCTYPE html>
 <head>
@@ -89,30 +109,6 @@ include("../include/connection.php");
                             </div>
                             <div class="col-md-6">
                             <h5 class="text-center my2">Change Username</h5>
-                            <?php
-
-                            if (isset($_POST['change_uname'])) {
-                                $uname = $_POST['uname'];
-
-                                if (empty($uname)) {
-
-                                }else {
-                                    $query = "UPDATE doctors SET username='$uname' WHERE id='$doctorid'";
-                                    $res = mysqli_query($connect, $query); 
-                                    $query = "UPDATE appointments SET doctor_name='$uname' WHERE doctor_name='$doc'";
-                                    $res2 = mysqli_query($connect, $query);  
-
-                                    if($res) {
-                                        $_SESSION['doctor'] = $uname;
-                                        header("Location: ".$_SERVER['PHP_SELF']);
-                                    }
-                                }
-                            }
-
-
-
-
-                            ?>
                             <form method="post">
                                 <label>Change Username</label>
                                 <input type="text" name="uname" class="form-control" autocomplete="off" placeholder="Enter Username">
