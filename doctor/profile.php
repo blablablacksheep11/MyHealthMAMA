@@ -116,33 +116,53 @@ if (isset($_POST['change_uname'])) {
                                 <input type="submit" name="change_uname" class="btn btn-success" value="Change Username">
                             </form>
                             <br><br>
-
-                            <h5 class="text-center my2">Change Password</h5>
-
                             <?php
 
-                            if ($_POST['change_pass']) {
+                                if (isset($_POST['change_pass'])) {
 
-                                $old = $_POST['old_pass'];
-                                $new = $_POST['new_pass'];
-                                $con = $_POST['con_pass'];
-                                
-                                $ol = "SELECT * FROM doctors WHERE username='$doc'";
-                                $ols = mysqli_query($connect,$ol);
-                                $row = mysqli_fetch_array($ols);
+                                    $error = array();
+                                    $old = $_POST['old_pass'];
+                                    $new = $_POST['new_pass'];
+                                    $con = $_POST['con_pass'];
 
-                                if($old != $row['password']) {
+                                    $ol = "SELECT * FROM doctors WHERE username='$doc'";
+                                    $ols = mysqli_query($connect, $ol);
+                                    $row = mysqli_fetch_array($ols);
+
+                                    if (empty($old)) {
+                                        $error['p'] = "Enter old password";
+                                    }else if (empty($new)) {
+                                        $error['p'] = "Enter new password";
+                                    }else if (empty($con)) {
+                                        $error['p'] = "Confirm password";
+                                    }else if ($old != $row["password"]) {
+                                        $error['p'] = "Invalid old password";
+                                    }else if ($new != $con) {
+                                        $error['p'] = "Both password does not match";
+                                    }
                                     
-                                }else if(empty($new)){
 
-                                }else if($con != $new){
+                                    if (count($error)==0) {
+                                        $query = "UPDATE doctors SET password='$new' WHERE username='$doc'";
+                                        mysqli_query($connect,$query);
+                                        echo "<script>alert('Password updated.')</script>";
+                                    }
+                                }
+                                if (isset($error['p'])) {
+                                    $e = $error['p'];
 
+                                    $show = "<h5 class='text-center alert alert-danger'>$e</h5>";
                                 }else{
-                                    $query = "UPDATE doctors SET password='$new' WHERE username='$doc'";
-                                    mysqli_query($connect,$query);
-                                }  
-                            }
-                            ?>
+                                    $show = "";
+                                }
+                                ?>
+
+                            <h5 class="text-center my2">Change Password</h5>
+                            <div>
+                                            <?php 
+                                            echo $show;
+                                            ?>
+                                        </div>
 
                             <form method="post">
                                 <div class="form-group">

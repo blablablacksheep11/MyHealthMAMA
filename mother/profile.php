@@ -118,13 +118,11 @@ if (isset($_POST['change_uname'])) {
                                     <input type="submit" name="change_uname" class="btn btn-success" value="Change Username">
                                 </form>
                                 <br><br>
-
-                                <h5 class="text-center my2">Change Password</h5>
-
                                 <?php
 
                                 if (isset($_POST['change_pass'])) {
 
+                                    $error = array();
                                     $old = $_POST['old_pass'];
                                     $new = $_POST['new_pass'];
                                     $con = $_POST['con_pass'];
@@ -133,15 +131,40 @@ if (isset($_POST['change_uname'])) {
                                     $ols = mysqli_query($connect, $ol);
                                     $row = mysqli_fetch_array($ols);
 
-                                    if ($old != $row['password']) {
-                                    } else if (empty($new)) {
-                                    } else if ($con != $new) {
-                                    } else {
+                                    if (empty($old)) {
+                                        $error['p'] = "Enter old password";
+                                    }else if (empty($new)) {
+                                        $error['p'] = "Enter new password";
+                                    }else if (empty($con)) {
+                                        $error['p'] = "Confirm password";
+                                    }else if ($old != $row["password"]) {
+                                        $error['p'] = "Invalid old password";
+                                    }else if ($new != $con) {
+                                        $error['p'] = "Both password does not match";
+                                    }
+                                    
+
+                                    if (count($error)==0) {
                                         $query = "UPDATE mothers SET password='$new' WHERE username='$mother'";
-                                        mysqli_query($connect, $query);
+                                        mysqli_query($connect,$query);
+                                        echo "<script>alert('Password updated.')</script>";
                                     }
                                 }
+                                if (isset($error['p'])) {
+                                    $e = $error['p'];
+
+                                    $show = "<h5 class='text-center alert alert-danger'>$e</h5>";
+                                }else{
+                                    $show = "";
+                                }
                                 ?>
+
+                                <h5 class="text-center my2">Change Password</h5>
+                                <div>
+                                            <?php 
+                                            echo $show;
+                                            ?>
+                                        </div>
 
                                 <form method="post">
                                     <div class="form-group">
