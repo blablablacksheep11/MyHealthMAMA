@@ -13,7 +13,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-info bg-pink">
-        <h5 class="text-white">Buku KIA SYSTEM</h5>
+        <h5 class="text-white">PregnaCare +</h5>
         
         <div class="mr-auto"></div>
 
