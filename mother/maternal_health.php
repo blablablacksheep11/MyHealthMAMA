@@ -13,11 +13,11 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: auto;
         }
 
         .container-fluid {
-            height: 100%;
+            height: fit-content;
             overflow: auto;
         }
 
@@ -46,7 +46,7 @@ $motherid = (int)$_SESSION['mother_id'];
 
 
 // Fetch weight data for the current mother
-$weightQuery = "SELECT * FROM weight_measurements WHERE mother_id = '$motherid'";
+$weightQuery = "SELECT * FROM weight_measurements WHERE mother_id = '$motherid' ORDER BY date";
 $result = mysqli_query($connect, $weightQuery);
 if (!$result) {
     die("Query failed: " . mysqli_error($connect));

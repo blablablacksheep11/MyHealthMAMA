@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-info bg-pink">
+    <nav class="navbar navbar-expand-lg navbar-info bg-pink" style="position: sticky; top:0%; z-index:3">
         <h5 class="text-white">PregnaCare +</h5>
         
         <div class="mr-auto"></div>

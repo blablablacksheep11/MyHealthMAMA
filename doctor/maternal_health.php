@@ -18,11 +18,12 @@ while ($row = mysqli_fetch_assoc($motherResult)) {
 }
 
 // Initialize $weightData array
-$weightData = array();
 
 // Fetch weight data from the database for the selected mother
 if (isset($_POST['selectMother'])) {
+    
     $selectedMother = $_POST['selectedMother'];
+    
     
     // Retrieve weight data based on mother_name (which is the same as username)
     $getmotherid = "SELECT id FROM mothers WHERE username = '$selectedMother'";
@@ -38,6 +39,7 @@ if (isset($_POST['selectMother'])) {
         $row['date'] = date('Y-m-d', strtotime($row['date']));
         $weightData[] = $row;
     }
+
 }
 
 // Process form submission
@@ -88,12 +90,11 @@ if(isset($_POST["removeRecord"])){
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: auto;
         }
 
         .container-fluid {
             height: 100%;
-            overflow: auto;
         }
 
         .row {
@@ -120,11 +121,14 @@ if(isset($_POST["removeRecord"])){
                                     <div class="form-group">
                                         <label for="selectedMother">Select Mother</label>
                                         <select class="form-control" name="selectedMother" id="selectedMother" required>
+                                            
                                             <?php
                                             // Populate select dropdown with mothers' usernames
                                             foreach ($motherUsernames as $username) {
-                                                $selected = isset($selectedMother) && $selectedMother == $username ? 'selected' : '';
-                                                echo "<option value='$username' $selected>$username</option>";
+                                                if(isset($selectedMother) && $selectedMother == $username){
+                                                    echo "<option value='$username' selected>$username</option>";
+                                                }else{
+                                                echo "<option value='$username'>$username</option>";}
                                             }
                                             ?>
                                         </select>
@@ -133,7 +137,7 @@ if(isset($_POST["removeRecord"])){
                                 </form>
                                 <hr>
                                 <form method="post">
-                                    <?php if (!empty($weightData)): ?>
+                                    <?php if (!empty($weightData) || isset($selectedMother)): ?>
                                         <input type="hidden" name="motherUsername" value="<?php echo $selectedMother; ?>">
                                         <div class="form-group">
                                             <label for="inputDate">Date</label>

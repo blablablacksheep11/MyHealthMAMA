@@ -5,7 +5,7 @@ include("include/connection.php");
 
 // Handle Mother login
 if (isset($_POST['mother_login'])) {
-    $uname = strtolower($_POST['uname']); // Ensure username is lowercase
+    $uname = $_POST['uname']; // Ensure username is lowercase
     $pass = $_POST['pass'];
 
     if (empty($uname)) {
@@ -235,10 +235,6 @@ if (isset($_POST['nurse_login'])) {
         }
     </style>
     <script>
-        function toLowerCaseInput() {
-            var unameInput = document.getElementById('uname');
-            unameInput.value = unameInput.value.toLowerCase();
-        }
 
         function showForm(formId) {
             var forms = document.querySelectorAll('.login-form');
@@ -289,7 +285,7 @@ if (isset($_POST['nurse_login'])) {
                     <div class="form-group">
                         <label>Username</label>
                         <input type="text" name="uname" id="uname" class="form-control" 
-                            autocomplete="off" placeholder="Enter Username" oninput="toLowerCaseInput()">
+                            autocomplete="off" placeholder="Enter Username">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
