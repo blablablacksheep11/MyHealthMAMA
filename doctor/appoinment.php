@@ -85,7 +85,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                     <div class="row">
                         <div class="col-md-6">
                             <h2 class="my-4">Appointment Management</h2>
-                            <form method="post">
+                            <form id="appointmentform" method="post">
                                 <div class="form-group">
                                     <label for="motherUsername">Select Mother</label>
                                     <select class="form-control" name="motherUsername" id="motherUsername" required>
@@ -151,7 +151,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                                         echo "<td>" . $row['appointment_date'] . "</td>";
                                         echo "<td>" . $formattedTime . "</td>";
                                         echo "<td>" . $row['doctor_name'] . "</td>";
-                                        echo "<td><button class='btn btn-danger btn-sm remove-appointment' id='remove-appointment' value='".$row['id']."'>Remove</button></td>"; // Pass appointment ID as data attribute
+                                        echo "<td><button class='btn btn-danger btn-sm reschedule-appointment' id='reschedule-appointment' value='".$row['id']."'>Reschedule</button></td>"; // Pass appointment ID as data attribute
                                         echo "</tr>";
                                     }
                                     ?>
@@ -166,25 +166,23 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
     </div>
 </div>
 
-<!-- jQuery for removal functionality -->
+<!-- jQuery for functionality -->
 <script>
     $(document).ready(function() {
-        // Add event listener to dynamically added remove buttons
-        $(document).on("click", "#remove-appointment", function(e) {
+        // Add event listener to dynamically added reschedule buttons
+        $(document).on("click", "#reschedule-appointment", function(e) {
             e.preventDefault();
             // Retrieve the appointment ID associated with the button
             var appointmentId = $(this).val();
-            // Ask for confirmation before deletion
-            if (confirm("Are you sure you want to remove this record?")) {
-                // Send AJAX request to delete appointment
+            // Ask for confirmation before reschedule
+            if (confirm("Are you sure you want to reschedule this record?")) {
+                // Send AJAX request to reschedule appointment
                 $.ajax({
-                    url: "delete-appointment.php", // Use the same file for handling deletion
+                    url: "reschedule-appointment.php",
                     method: "POST",
-                    data: { deleteAppointment: appointmentId }, // Pass the appointment ID to delete
+                    data: { rescheduleAppointment: appointmentId }, // Pass the appointment ID to reschedule
                     success: function(response) {
-                        // Reload the page after successful deletion
-                        location.reload();
-                        alert("Record deleted");
+                        $("#appointmentform").load("reschedule-appointment.php");
                     },
                     error: function(xhr, status, error) {
                         // Handle errors
@@ -194,6 +192,8 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
             }
         });
         
+
+        //ajax for add new appointment
         $(document).on("click", "#addbutton", function(e) {
             e.preventDefault();
             
@@ -201,7 +201,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
             var appointmentdate = $("#appointmentDate").val();
             var appointmenttime = $("#appointmentTime").val();
             var doctorusername = $("#doctorUsername").val();
-                // Send AJAX request to delete appointment
+                // Send AJAX request to add appointment
                 if(appointmenttime.length>0 && appointmentdate.length>0){
                 $.ajax({
                     url: "add-appointment.php",
@@ -215,6 +215,40 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                     success: function(response) {
                         location.reload();
                         alert("Record added");
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors
+                        console.error(xhr.responseText);
+                    }
+                });
+            }else{
+                alert("Please provide the correct information");
+            }
+        });
+
+
+        //ajax for update appointment
+        $(document).on("click", "#reschedulebutton", function(e) {
+            e.preventDefault();
+            
+            var motherusername = $("#motherUsername").val();
+            var appointmentdate = $("#appointmentDate").val();
+            var appointmenttime = $("#appointmentTime").val();
+            var doctorusername = $("#doctorUsername").val();
+                // Send AJAX request to add appointment
+                if(appointmenttime.length>0 && appointmentdate.length>0){
+                $.ajax({
+                    url: "update-appointment.php",
+                    method: "POST",
+                    data: {
+                        motherusername: motherusername,
+                        appointmentdate: appointmentdate,
+                        appointmenttime: appointmenttime,
+                        doctorusername: doctorusername
+                    }, 
+                    success: function(response) {
+                        location.reload();
+                        alert("Appointment rescheduled");
                     },
                     error: function(xhr, status, error) {
                         // Handle errors
