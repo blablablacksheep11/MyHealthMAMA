@@ -128,7 +128,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                                         <th>Appointment Date</th>
                                         <th>Appointment Time</th>
                                         <th>Doctor Username</th>
-                                        <th>Remove</th>
+                                        <th>Reschedule</th>
                                     </tr>
                                     </thead>
                                     <tbody>
