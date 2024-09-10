@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Nurse Account Request</title>
+    <title>PregnaCare +</title>
     <style>
         .footer {
             background-color: pink;

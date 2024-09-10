@@ -1,11 +1,38 @@
 <?php
+include("../include/connection.php");
 session_start();
+
+if(isset($_POST["editbutton"])){
+    $selectedmotherid = $_POST["editbutton"];
+    $getmotherinfo = "SELECT * FROM mothers WHERE id='$selectedmotherid'";
+    $result = mysqli_query($connect, $getmotherinfo);
+    $motherinfo = mysqli_fetch_assoc($result);
+
+    //store data into session
+    $_SESSION["id"] = $selectedmotherid;
+    $_SESSION["firstname"] = $motherinfo["firstname"];
+    $_SESSION["surname"] = $motherinfo["surname"];
+    $_SESSION["dob"] = $motherinfo["dob"];
+    $_SESSION["phone"] = $motherinfo["phone"];
+    $_SESSION["email"] = $motherinfo["email"];
+    $_SESSION["username"] = $motherinfo["username"];
+    $_SESSION["password"] = $motherinfo["password"];
+
+    header("Location: edit-mother-info.php");
+}
+
+if(isset($_POST["removebtn"])){
+    $selectedmotherid = $_POST["removebtn"];
+    $deletemotherinfo = "DELETE appointments.*,feedback.*,mothers.*,videos.*,weight_measurements.* FROM mothers INNER JOIN appointments ON mothers.id=appointments.mother_id INNER JOIN feedback ON mothers.username=feedback.sender_username INNER JOIN videos ON mothers.id=videos.mother_id INNER JOIN weight_measurements ON mothers.id=weight_measurements.mother_id WHERE mothers.id='$selectedmotherid'";
+    mysqli_query($connect, $deletemotherinfo);
+
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Total Mothers</title>
+    <title>PregnaCare +</title>
     <style>
         .footer {
             background-color: pink;
@@ -19,7 +46,6 @@ session_start();
 
     <?php
     include("../include/header.php");
-    include("../include/connection.php");
     ?>
 
     <div class="container-fluid">
@@ -35,7 +61,7 @@ session_start();
 
                     <?php 
                     // Fetch mother information
-                    $query = "SELECT firstname, surname, dob, phone, email, username, password FROM mothers";
+                    $query = "SELECT id, firstname, surname, dob, phone, email, username, password FROM mothers";
                     $res = mysqli_query($connect, $query);
 
                     // Initialize output variable
@@ -51,6 +77,7 @@ session_start();
                                 <th>Email</th>
                                 <th>Username</th>
                                 <th>Password</th>
+                                <th>Actions</th>
                             </tr>
                     ";
 
@@ -74,6 +101,10 @@ session_start();
                                 <td>".$row['email']."</td>
                                 <td>".$row['username']."</td>
                                 <td>".$row['password']."</td>
+                                <td>
+        <form method='post'><button type='submit' class='btn btn-primary' name='editbutton' value=".$row['id'].">Edit</button>
+        <button id='removebtn' name='removebtn' class='btn btn-primary' style='background-color: red; border: none;' value=".$row['id'].">Remove</button>
+        </form></td>
                             </tr>
                         ";
                     }

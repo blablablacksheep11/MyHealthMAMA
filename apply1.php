@@ -41,7 +41,7 @@ if (isset($error['apply'])) {
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Registeration</title>
+        <title>PregnaCare +</title>
         <style>
         .footer {
             background-color: pink;

@@ -58,7 +58,7 @@ if (isset($error['u'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin</title>
+    <title>PregnaCare +</title>
     <style>
         .footer {
             background-color: pink;

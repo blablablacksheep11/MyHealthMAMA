@@ -6,7 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>PregnaCare +</title>
     <style>
         .footer {
             background-color: pink;

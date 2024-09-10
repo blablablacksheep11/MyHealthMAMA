@@ -1,13 +1,38 @@
 <?php
-
+include("../include/connection.php");
 session_start();
 
+if(isset($_POST["editbutton"])){
+    $selectednurseid = $_POST["editbutton"];
+    $getnurseinfo = "SELECT * FROM nurses WHERE id='$selectednurseid'";
+    $result = mysqli_query($connect, $getnurseinfo);
+    $nurseinfo = mysqli_fetch_assoc($result);
+
+    //store data into session
+    $_SESSION["id"] = $selectednurseid;
+    $_SESSION["firstname"] = $nurseinfo["firstname"];
+    $_SESSION["surname"] = $nurseinfo["surname"];
+    $_SESSION["email"] = $nurseinfo["email"];
+    $_SESSION["gender"] = $nurseinfo["gender"];
+    $_SESSION["phone"] = $nurseinfo["phone"];
+    $_SESSION["username"] = $nurseinfo["username"];
+    $_SESSION["password"] = $nurseinfo["password"];
+
+    header("Location: edit-nurse-info.php");
+}
+
+if(isset($_POST["removebtn"])){
+    $selectednurseid = $_POST["removebtn"];
+    $deletenurseinfo = "DELETE FROM nurses WHERE id='$selectednurseid'";
+    mysqli_query($connect, $deletenurseinfo);
+
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Total Nurses</title>
+    <title>PregnaCare +</title>
     <style>
         .footer {
             background-color: pink;
@@ -20,9 +45,7 @@ session_start();
 <body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
 
     <?php
-    include("../include/header.php");
-
-    include("../include/connection.php");
+    include("../include/header.php");    
     ?>
 
     <div class="container=fluid">
@@ -59,7 +82,7 @@ $output .="
         <th>Phone</th>
         <th>Username</th>
         <th>Password</th>
-
+        <th>Actions</th>
     </tr>
 ";
 
@@ -68,7 +91,7 @@ if (mysqli_num_rows($res) < 1){
     $output .="
 
         <tr>
-        <td colspan='10' class='text-center'>No Job Request Yet.</td>
+        <td colspan='10' class='text-center'>No Nurse Registered Yet.</td>
         </tr>
     ";
 }
@@ -86,6 +109,10 @@ while ($row = mysqli_fetch_assoc($res)){
         <td>".$row['phone']."</td>
         <td>".$row['username']."</td>
         <td>".$row['password']."</td>
+        <td>
+        <form method='post'><button type='submit' class='btn btn-primary' name='editbutton' value=".$row['id'].">Edit</button>
+        <button id='removebtn' name='removebtn' class='btn btn-primary' style='background-color: red; border: none;' value=".$row['id'].">Remove</button>
+        </form></td>
     
     ";
 }

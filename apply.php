@@ -41,7 +41,7 @@ if (isset($error['apply'])) {
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Registeration</title>
+        <title>PregnaCare +</title>
 </head>
 <body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
 <style>
