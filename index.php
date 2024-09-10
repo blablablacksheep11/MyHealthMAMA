@@ -5,7 +5,7 @@ include("include/connection.php");
 
 // Handle Mother login
 if (isset($_POST['mother_login'])) {
-    $uname = $_POST['uname']; // Ensure username is lowercase
+    $uname = $_POST['uname']; 
     $pass = $_POST['pass'];
 
     if (empty($uname)) {

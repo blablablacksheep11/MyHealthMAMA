@@ -117,7 +117,7 @@ if(isset($_POST["removeRecord"])){
                             <div class="col-md-6">
                                 <h2 class="my-4">Weight Tracking</h2>
                                 <!-- Form to select mother -->
-                                <form method="post">
+                                <form method="post" id="motherform" onchange="document.getElementById('selectbutton').click()">
                                     <div class="form-group">
                                         <label for="selectedMother">Select Mother</label>
                                         <select class="form-control" name="selectedMother" id="selectedMother" required>
@@ -133,7 +133,7 @@ if(isset($_POST["removeRecord"])){
                                             ?>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" name="selectMother">Select</button>
+                                    <button type="submit" class="btn btn-primary" name="selectMother" id="selectbutton">Select</button>
                                 </form>
                                 <hr>
                                 <form method="post">
@@ -198,6 +198,7 @@ if(isset($_POST["removeRecord"])){
     <!-- JavaScript to update chart -->
     <?php if (!empty($weightData)){ ?>
         <script>
+
             // Initialize the weight chart
             var ctx = document.getElementById('weightChart').getContext('2d');
             var weightChart = new Chart(ctx, {
