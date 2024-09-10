@@ -13,15 +13,6 @@
         exit;
     }
 
-    $doctorUsername = $_SESSION['username'];
-
-    // Fetch feedback messages for the logged-in doctor
-    $feedbackQuery = "SELECT title, description, sender_username FROM feedback";
-    $feedbackResult = mysqli_query($connect, $feedbackQuery);
-
-    if (!$feedbackResult) {
-        die("Query failed: " . mysqli_error($connect));
-    }
 
     ?>
 
@@ -73,7 +64,11 @@
                                     <tbody>
                                     <?php
                                             // Fetch feedback data from the database
-                                            $feedbackQuery = "SELECT title, description,sender_username FROM feedback";
+                                            $doctorUsername = $_SESSION['doctor'];
+                                            $getdoctorid = "SELECT id FROM doctors WHERE username='$doctorUsername'";
+                                            $result = mysqli_query($connect, $getdoctorid);
+                                            $doctorid = mysqli_fetch_column($result);
+                                            $feedbackQuery = "SELECT title, description,sender_username FROM feedback WHERE receiver_id='$doctorid'";
                                             $feedbackResult = mysqli_query($connect, $feedbackQuery);
                                             if (!$feedbackResult) {
                                                 die("Query failed: " . mysqli_error($connect));
