@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include("../include/header.php");
-require 'vendor/autoload.php'; // Path to Composer autoload.php
+require '../vendor/autoload.php'; // Path to Composer autoload.php
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
         $mail->SMTPAuth = true;
         $mail->Username = 'lamyongqin@gmail.com'; // SMTP username
-        $mail->Password = 'wnwsewrlkwkmogil'; // SMTP password
+        $mail->Password = 'ucfzomtifelijucq'; // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 

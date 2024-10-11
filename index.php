@@ -182,7 +182,7 @@ if (isset($_POST['nurse_login'])) {
         .image .img {
             max-width: 85.7%;
             max-height: 20%;
-            margin-top:70px; /* Center the image horizontally */
+            margin-top:110px; /* Center the image horizontally */
         }
 
         .footer {
@@ -290,6 +290,7 @@ if (isset($_POST['nurse_login'])) {
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" name="pass" class="form-control" placeholder="Enter Password">
+                        <a href="forgot-pass-mothers.php" style="right: 3%;position: absolute">Forgot Password</a>
                     </div>
                     <input type="submit" name="mother_login" class="btn btn-info my-3" value="Login">
                     <p>Don't have an account? <a href="account.php">Register here</a></p>
@@ -319,6 +320,7 @@ if (isset($_POST['nurse_login'])) {
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" name="pass" class="form-control" placeholder="Enter Password">
+                        <a href="forgot-pass-doctors.php" style="right: 3%;position: absolute">Forgot Password</a>
                     </div>
                     <input type="submit" name="doctor_login" class="btn btn-primary" value="Login">
                     <p>Don't have an account? <a href="apply.php">Register here</a></p>
@@ -333,6 +335,7 @@ if (isset($_POST['nurse_login'])) {
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" name="pass" class="form-control" placeholder="Enter Password">
+                        <a href="forgot-pass-nurses.php" style="right: 3%;position: absolute">Forgot Password</a>
                     </div>
                     <input type="submit" name="nurse_login" class="btn btn-warning" value="Login">
                     
