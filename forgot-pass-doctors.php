@@ -40,18 +40,18 @@ include("include/connection.php");
     </style>
 </head>
 
-<body>
+<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
     <div class="container-fluid position-absolute h-100">
         <div class="row">
-            <div class="d-none d-md-block col-md-3" style="background-color: whitesmoke;"></div>
-            <div class="col-sm-12 col-md-6 p-0" style="background-color: whitesmoke;" id="center-container">
+            <div class="d-none d-md-block col-md-3" style="background-color: transparent;"></div>
+            <div class="col-sm-12 col-md-6 p-0" style="background-color: transparent;" id="center-container">
                 <div class="card border bg-white p-0 text-center">
-                    <div class="card-header m-0 h2 text-white bg-primary">Password Reset</div>
+                    <div class="card-header m-0 h2 text-white" style="background-color: #FFB0B0;">Password Reset</div>
                     <div class="card-body p-5" id="form-container">
                         <p class="card-text my-0 mx-0">Enter your email and we will send you the verification code for password reset.</p>
                         <form action="../authentication/forgot-pass.php" method="post" autocomplete="off">
                             <input type="email" class="form-control mt-4" id="email" placeholder="email">
-                            <input type="submit" class="btn btn-primary mt-4 w-100" name="submit-btn" id="submit-btn" value="Submit" disabled>
+                            <input type="submit" class="btn mt-4 w-100" name="submit-btn" id="submit-btn" value="Submit" disabled style="background-color: #FFB0B0; color:white">
                         </form>
                         <div class="row mx-0 mt-2">
                             <div class="col text-center">
@@ -61,7 +61,7 @@ include("include/connection.php");
                     </div>
                 </div>
             </div>
-            <div class="d-none d-md-block col-md-3" style="background-color: whitesmoke;"></div>
+            <div class="d-none d-md-block col-md-3" style="background-color: transparent;"></div>
         </div>
     </div>
     <!--import bootstrap-->

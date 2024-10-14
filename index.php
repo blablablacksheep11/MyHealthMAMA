@@ -123,8 +123,7 @@ if (isset($_POST['nurse_login'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PregnaCare +</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* Your existing CSS styles */
@@ -248,14 +247,21 @@ if (isset($_POST['nurse_login'])) {
         }
 
         // Function to initialize default form on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function(){
             // Choose "Mother" radio button by default
             var motherRadio = document.querySelector('input[name="user_type"][value="mother"]');
+            var adminRadio = document.querySelector('input[name="user_type"][value="admin"]');
+            var nurseRadio = document.querySelector('input[name="user_type"][value="nurse"]');
+            var doctorRadio = document.querySelector('input[name="user_type"][value="doctor"]');
             if (motherRadio) {
                 motherRadio.checked = true; // Mark "Mother" as checked
+                adminRadio.checked = false;
+                doctorRadio.checked = false;
+                nurseRadio.checked = false;
                 showForm('motherForm'); // Show the corresponding form
             }
-        });
+        })
+        
     </script>
 </head>
 <body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
