@@ -23,6 +23,9 @@ if (isset($_POST['mother_login'])) {
             $_SESSION['username'] = $uname;
             $_SESSION['mother_username'] = $uname;
             $_SESSION['mother_id'] = $valuereturned["id"];
+            unset($_SESSION['admin']);
+            unset($_SESSION['doctor']);
+            unset($_SESSION['nurse']);
             
             header("Location: mother/index.php");
             exit();
@@ -51,6 +54,9 @@ if (isset($_POST['admin_login'])) {
 
         if (mysqli_num_rows($result) == 1) {
             $_SESSION['admin'] = $username;
+            unset($_SESSION['mother']);
+            unset($_SESSION['doctor']);
+            unset($_SESSION['nurse']);
             header("Location: admin/index.php");
             exit();
         } else {
@@ -79,6 +85,9 @@ if (isset($_POST['doctor_login'])) {
 
         if ($row) {
             $_SESSION['doctor'] = $username;
+            unset($_SESSION['admin']);
+            unset($_SESSION['mother']);
+            unset($_SESSION['nurse']);
             header("Location: doctor/index.php");
             exit();
         } else {
@@ -107,6 +116,9 @@ if (isset($_POST['nurse_login'])) {
 
         if ($row) {
             $_SESSION['nurse'] = $username;
+            unset($_SESSION['admin']);
+            unset($_SESSION['doctor']);
+            unset($_SESSION['mother']);
             header("Location: nurse/index.php");
             exit();
         } else {

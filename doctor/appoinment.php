@@ -128,7 +128,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                                         <th>Appointment Date</th>
                                         <th>Appointment Time</th>
                                         <th>Doctor Username</th>
-                                        <th>Reschedule</th>
+                                        <th colspan="2">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -151,7 +151,8 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                                         echo "<td>" . $row['appointment_date'] . "</td>";
                                         echo "<td>" . $formattedTime . "</td>";
                                         echo "<td>" . $row['doctor_name'] . "</td>";
-                                        echo "<td><button class='btn btn-danger btn-sm reschedule-appointment' id='reschedule-appointment' value='".$row['id']."'>Reschedule</button></td>"; // Pass appointment ID as data attribute
+                                        echo "<td style='border-right:none'><button class='btn btn-primary reschedule-appointment' id='reschedule-appointment' value='".$row['id']."'>Reschedule</button></td>"; // Pass appointment ID as data attribute
+                                        echo "<td style='border-left:none'><button class='btn btn-danger delete-appointment' id='delete-appointment' value='".$row['id']."'>Delete</button></td>"; // Pass appointment ID as data attribute
                                         echo "</tr>";
                                     }
                                     ?>
@@ -226,6 +227,29 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
             }
         });
 
+        //ajax for delete appointment
+        $(document).on("click", "#delete-appointment", function(e) {
+            e.preventDefault();
+            // Retrieve the appointment ID associated with the button
+            var appointmentId = $(this).val();
+            // Ask for confirmation before reschedule
+            if (confirm("Are you sure you want to delete this record?")) {
+                // Send AJAX request to reschedule appointment
+                $.ajax({
+                    url: "delete-appointment.php",
+                    method: "POST",
+                    data: { appointmentId: appointmentId }, // Pass the appointment ID to reschedule
+                    success: function(response) {
+                        location.reload();
+                        alert('Appointment deleted.');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
 
         //ajax for update appointment
         $(document).on("click", "#reschedulebutton", function(e) {

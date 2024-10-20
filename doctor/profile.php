@@ -22,6 +22,7 @@ if (isset($_POST['change_uname'])) {
         
     }
 }
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -179,6 +180,7 @@ if (isset($_POST['change_uname'])) {
                                 </div>
                                 <input type="submit" name="change_pass" class="btn btn-info" value="Change Password">
                             </form>
+                            
                             </div>
                             </div>
                         </div>

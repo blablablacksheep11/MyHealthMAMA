@@ -17,7 +17,7 @@ echo "<div class='col mx-1 p-0'>";
 echo "<input type='number' class='form-control m-0 text-center fs-2 numberfield' id='num4'>";
 echo "</div>";
 echo "</div>";
-echo "<input type='submit' class='btn btn-primary mt-4 w-100' name='verify-btn' id='verify-btn' value='Verify' disabled>";
+echo "<input type='submit' class='btn mt-4 w-100' name='verify-btn' id='verify-btn' value='Verify' disabled style='background-color: #FFB0B0; color:white'>";
 echo "</form>";
 echo "<div class='row mx-0 mt-2'>";
 echo "<div class='col text-center'>";

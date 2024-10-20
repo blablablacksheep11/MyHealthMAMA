@@ -6,14 +6,6 @@
     include("../include/header.php");
     include("../include/connection.php");
 
-    // Check if the doctor is logged in
-    if (!isset($_SESSION['username'])) {
-        echo "<script>alert('Please log in first');</script>";
-        echo "<script>window.location.href = 'login.php';</script>";
-        exit;
-    }
-
-
     ?>
 
     <!DOCTYPE html>

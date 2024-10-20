@@ -3,23 +3,32 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+include("../include/connection.php");
 include("../include/header.php");
 require '../vendor/autoload.php'; // Path to Composer autoload.php
+
+// Fetch list of mothers' usernames from the database
+$motherQuery = "SELECT username FROM mothers";
+$motherResult = mysqli_query($connect, $motherQuery);
+if (!$motherResult) {
+    die("Query failed: " . mysqli_error($connect));
+}
+$motherUsernames = array();
+while ($row = mysqli_fetch_assoc($motherResult)) {
+    $motherUsernames[] = $row['username'];
+}
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $recipient_emails = $_POST['recipient_emails']; 
+    $recipientname = $_POST['recipient']; 
     $message = $_POST['message'];
     $subject = 'Notification from Nurse Dashboard';
 
-    // Check recipient_emails for multiple emails and make it an array.
-    if (stristr($recipient_emails, ',')) {
-        $recipient_emails = explode(',', $recipient_emails);
-    } else {
-        $recipient_emails = [$recipient_emails];
-    }
+    $sql="SELECT email FROM mothers WHERE username='$recipientname'";
+    $result = mysqli_query($connect, $sql);
+    if (($valuereturned=mysqli_fetch_column($result))>=1) {
 
     // Create a new PHPMailer instance
     $mail = new PHPMailer(true);
@@ -34,14 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-
         // Sender info
         $mail->setFrom('lamyongqin@gmail.com', 'Nurse Dashboard');
+        $mail->addAddress($valuereturned,  $recipientname); // Add a recipient
 
-        // Add recipients
-        foreach ($recipient_emails as $email) {
-            $mail->addAddress(trim($email));
-        }
 
         // Content
         $mail->isHTML(true); // Set email format to HTML
@@ -54,6 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (Exception $e) {
         $notification_status = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+}else{
+    echo "<script>alert('This email is not registered under PregnaCare +')</script>";
+}
 }
 ?>
 
@@ -94,8 +102,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h2 class="my-4">Send Email Notification - Nurse Dashboard</h2>
                     <form method="post">
                         <div class="form-group">
-                            <label for="recipient_emails">Recipient Email(s):</label>
-                            <input type="text" class="form-control" id="recipient_emails" name="recipient_emails" required>
+                            <label for="recipient">Recipient Name:</label>
+                            <select name="recipient" id="recipient" class="form-control">
+                                <option selected disabled>Select a mother</option>
+                            <?php
+                                        foreach ($motherUsernames as $username) {
+                                            echo "<option value='$username'>$username</option>";
+                                        }
+                                        ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="message">Message:</label>

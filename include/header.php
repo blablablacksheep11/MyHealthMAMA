@@ -19,7 +19,6 @@
 
         <ul class="navbar-nav">
             <?php
-
             if (isset($_SESSION['admin'])) {
                 $user = $_SESSION['admin'];
                     echo '
