@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2024 at 03:50 AM
+-- Generation Time: Oct 20, 2024 at 06:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,6 +73,14 @@ CREATE TABLE `doctors` (
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `doctors`
+--
+
+INSERT INTO `doctors` (`id`, `firstname`, `surname`, `email`, `gender`, `phone`, `username`, `password`, `status`) VALUES
+(1, 'Calvin', 'Ng', 'lamyongqin@gmail.com', 'Male', '0163345589', 'Doctor1', 'doctor1', 'Approved'),
+(2, 'Joanna', 'Yeoh', 'lamyongqin@gmail.com', 'Female', '0167765521', 'Doctor2', 'doctor2', 'Approved');
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +94,13 @@ CREATE TABLE `feedback` (
   `sender_username` varchar(255) NOT NULL,
   `receiver_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `title`, `description`, `sender_username`, `receiver_id`) VALUES
+(8, 'hello', 'test', 'mother1', 2);
 
 -- --------------------------------------------------------
 
@@ -108,6 +123,13 @@ CREATE TABLE `mothers` (
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `mothers`
+--
+
+INSERT INTO `mothers` (`id`, `firstname`, `surname`, `dob`, `phone`, `email`, `address`, `due_date`, `obstetric_history`, `medical_conditions`, `username`, `password`) VALUES
+(3, 'Ashley', 'Goh', '2024-02-21', '0176652231', 'lamyongqin@gmail.com', 'Wisma Greenhall 43, Green Hall, 10200 George Town, Pulau Pinang', '2024-10-31', 'none', 'none', 'mother1', 'mother1');
+
 -- --------------------------------------------------------
 
 --
@@ -125,6 +147,13 @@ CREATE TABLE `nurses` (
   `password` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `nurses`
+--
+
+INSERT INTO `nurses` (`id`, `firstname`, `surname`, `email`, `gender`, `phone`, `username`, `password`, `status`) VALUES
+(3, 'Siti', 'Ann', 'lamyongqin@gmail.com', 'Female', '0176678865', 'nurse1', 'nurse1', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -152,6 +181,13 @@ CREATE TABLE `weight_measurements` (
   `date` date NOT NULL,
   `weight` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `weight_measurements`
+--
+
+INSERT INTO `weight_measurements` (`id`, `mother_id`, `date`, `weight`) VALUES
+(1, 3, '2024-10-04', 70);
 
 --
 -- Indexes for dumped tables
@@ -219,31 +255,31 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `mothers`
 --
 ALTER TABLE `mothers`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nurses`
 --
 ALTER TABLE `nurses`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `videos`
@@ -255,7 +291,7 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `weight_measurements`
 --
 ALTER TABLE `weight_measurements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

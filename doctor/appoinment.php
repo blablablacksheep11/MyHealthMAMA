@@ -89,6 +89,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                                 <div class="form-group">
                                     <label for="motherUsername">Select Mother</label>
                                     <select class="form-control" name="motherUsername" id="motherUsername" required>
+                                        <option selected disabled>Select a mother</option>
                                         <?php
                                         foreach ($motherUsernames as $username) {
                                             echo "<option value='$username'>$username</option>";

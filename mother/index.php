@@ -93,7 +93,6 @@ session_start();
                             <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <h5 class="text-white my-4">Send</h5> 
                                     <h5 class="text-white my-4">Report</h5>
                                 </div>
                                 <div class="col-md-4">

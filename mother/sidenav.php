@@ -11,7 +11,7 @@
                     <a href="maternal_health.php" class="list-group-item list-group-item-action bg-pink text-center text-grey">Maternal Health Record</a>
                     <a href="appoinment.php" class="list-group-item list-group-item-action bg-pink text-center text-grey">Appoinment</a>
                     <a href="education.php" class="list-group-item list-group-item-action bg-pink text-center text-grey">Educational Content</a>
-                    <a href="report.php" class="list-group-item list-group-item-action bg-pink text-center text-grey">Send Report</a>
+                    <a href="report.php" class="list-group-item list-group-item-action bg-pink text-center text-grey">Report</a>
 </div>
 
 <style>

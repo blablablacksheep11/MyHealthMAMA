@@ -101,6 +101,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 </form>
                             </div>
+
+                            <div class="col-md-6" style="top:5vh; right:-1vw">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Receiver</th>
+                                        <th>Reply</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    // Fetch feedback data from the database
+                                    $motherusername = $_SESSION['mother'];
+                                    $sql = "SELECT id,title,description,receiver_id,reply FROM feedback WHERE sender_username='$motherusername'";
+                                    $result = mysqli_query($connect, $sql);
+                                    if (!$result) {
+                                        die("Query failed: " . mysqli_error($connect));
+                                    }
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<tr>";
+                                        echo "<td>".$row['id']."</td>";
+                                        echo "<td>".$row['title']."</td>";
+                                        echo "<td>".$row['description']."</td>";
+                                        $currentdoctorid = $row['receiver_id'];
+                                        $getdoctorname = "SELECT username FROM doctors WHERE id='$currentdoctorid'";
+                                        $result2 = mysqli_query($connect, $getdoctorname);
+                                        $doctorname = mysqli_fetch_column($result2);
+                                        echo "<td>".$doctorname."</td>";
+                                        echo "<td>".$row['reply']."</td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         </div>
                     </div>
 

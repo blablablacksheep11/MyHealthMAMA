@@ -5,7 +5,6 @@
 
     include("../include/header.php");
     include("../include/connection.php");
-
     ?>
 
     <!DOCTYPE html>
@@ -30,6 +29,35 @@
                 left: 0;
                 right: 0;
             }
+
+            #block{
+                display: none;
+                position: absolute;
+                top: 32.5%;
+                left: 30%;
+                height: 35%;
+                width: 40%;
+            }
+
+            #replyfield{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                resize: none;
+                outline: none;
+            }
+
+            #submitbtn{
+                position: absolute;
+                bottom: 2%;
+                right: 1%;
+            }
+
+            #cancelbtn{
+                position: absolute;
+                bottom: 2%;
+                right: 15%;
+            }
         </style>
     </head>
     <body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
@@ -51,6 +79,7 @@
                                             <th>Mothers</th>
                                             <th>Title</th>
                                             <th>Description</th>
+                                            <th style="width: 10%;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,7 +89,7 @@
                                             $getdoctorid = "SELECT id FROM doctors WHERE username='$doctorUsername'";
                                             $result = mysqli_query($connect, $getdoctorid);
                                             $doctorid = mysqli_fetch_column($result);
-                                            $feedbackQuery = "SELECT title, description,sender_username FROM feedback WHERE receiver_id='$doctorid'";
+                                            $feedbackQuery = "SELECT id,title, description,sender_username FROM feedback WHERE receiver_id='$doctorid'";
                                             $feedbackResult = mysqli_query($connect, $feedbackQuery);
                                             if (!$feedbackResult) {
                                                 die("Query failed: " . mysqli_error($connect));
@@ -70,6 +99,7 @@
                                                 echo "<td>" . $row['sender_username'] . "</td>";
                                                 echo "<td>" . $row['title'] . "</td>";
                                                 echo "<td>" . $row['description'] . "</td>";
+                                                echo "<td><form method='post' action='report.php'><button class='btn btn-primary replybtn' style='color:white' value=".$row['id']." name='replybtn'>Reply</button></form></td>";
                                                 echo "</tr>";
                                             }
                                             ?>
@@ -83,6 +113,50 @@
             </div>
         </div>
     </div>
+    <div id="block">
+        <textarea name="replyfield" id="replyfield" placeholder="Add a reply here...."></textarea>
+        <button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
+        <button type="reset" class="btn btn-danger" id="cancelbtn" name="cancelbtn">Cancel</button>
+    </div>
+    <script>
+        $(document).ready(function(){
 
+            //when cancel button clicked
+            $(document).on("click","#cancelbtn", function(e){
+                e.preventDefault();
+                $('#block').hide(); //hide the text area
+            })
+
+            //when submit button clicked
+            $(document).on("click","#submitbtn", function(e){
+                e.preventDefault();
+                var reply = $('#replyfield').val(); 
+
+                $.ajax({
+                    type:  'POST',
+                    url:  'add-reply.php',
+                    data: {
+                        reply: reply,
+                    },
+                    success: function(){
+                        alert('Reply added');
+                        $('#block').hide(); //hide the text area
+                }
+            })
+            })
+        })
+    </script>
     </body>
     </html>
+
+    <?php
+    if(isset($_POST["replybtn"])){
+        $_SESSION["feedbackid"] = $_POST["replybtn"];
+        $feedbackid = $_POST["replybtn"];
+        echo "<script>document.getElementById('block').style.display='block'</script>";
+        $sql = "SELECT reply FROM feedback WHERE id='$feedbackid'";
+        $result = mysqli_query($connect,$sql);
+        $row = mysqli_fetch_column($result);
+        echo "<script>document.getElementById('replyfield').value='".$row."'</script>";
+    }
+    ?>
