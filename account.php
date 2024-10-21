@@ -115,8 +115,8 @@ if (isset($_POST["register"])) {
                             <textarea id="medical_conditions" name="medical_conditions" class="form-control" rows="3" required></textarea>
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Kad Pengenalan</label>
-                            <input type="text" name="kad_pengenalan" class="form-control" autocomplete="off" placeholder="Enter Kad Pengenalan" required>
+                            <label>IC Number</label>
+                            <input type="text" name="kad_pengenalan" class="form-control" autocomplete="off" placeholder="Enter IC Number" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -125,24 +125,24 @@ if (isset($_POST["register"])) {
                             <input type="text" name="gv" class="form-control" autocomplete="off" placeholder="Enter Gravida" required>
                         </div>
                         <div class="form-group col-md-6">
+                            <label>Para</label>
+                            <input type="text" name="Para" class="form-control" autocomplete="off" placeholder="Enter Para" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
                             <label>Race</label>
                             <input type="text" name="race" class="form-control" autocomplete="off" placeholder="Enter Race" required>
                         </div>
-                    </div>
-                    <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>No Pengenalan</label>
-                            <input type="text" name="penge" class="form-control" autocomplete="off" placeholder="Enter No Pengenalan" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Faktor Risiko</label>
-                            <input type="text" name="FakRisiko" class="form-control" autocomplete="off" placeholder="Faktor Risiko" readonly>
+                            <label>Risk Factor</label>
+                            <input type="text" name="FakRisiko" class="form-control" autocomplete="off" placeholder="Faktor Risiko" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Pekerjaan</label>
-                            <input type="text" name="work" class="form-control" autocomplete="off" placeholder="Enter Pekerjaan" required>
+                            <label>Employment</label>
+                            <input type="text" name="work" class="form-control" autocomplete="off" placeholder="Enter Employment" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Education</label>
@@ -170,10 +170,7 @@ if (isset($_POST["register"])) {
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Para</label>
-                            <input type="text" name="Para" class="form-control" autocomplete="off" placeholder="Enter Para" required>
-                        </div>
+                        
                         <div class="form-group col-md-6">
                             <label>Username</label>
                             <input type="text" name="uname" class="form-control" autocomplete="off" placeholder="Enter Username" required>
