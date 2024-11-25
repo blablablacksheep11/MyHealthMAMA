@@ -62,7 +62,7 @@ if (isset($_POST['search'])) {
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-image: url(img/background1.jpg);
+            background-image: url(img/background3.jpg);
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -97,7 +97,7 @@ if (isset($_POST['search'])) {
             </div>
             <div class="col-md-10">
                 <div class="container-fluid">
-                    <h2 class="my-4">Education Module - Nurse Dashboard</h2>
+                    <h2 class="my-4" style="color: #1434A4;">Education Module - Nurse Dashboard</h2>
                     <form method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="motherUsername">Select Mother:</label>

@@ -54,7 +54,7 @@ if(isset($_POST["removebtn"])){
         }
         </style>
 </head>
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 
     <?php
     include("../include/header.php");
@@ -72,7 +72,7 @@ if(isset($_POST["removebtn"])){
                 </div>
                 <div class="col-md-10">
                     <!--<div id="formcontainer"></div>-->
-                    <h5 class="text-center">Total Doctors</h5>
+                    <h5 class="text-center" style="color: #1434A4;">Total Doctors</h5>
 
                 <?php 
                 

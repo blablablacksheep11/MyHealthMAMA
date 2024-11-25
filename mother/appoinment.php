@@ -36,7 +36,7 @@ if (!$appointmentResult) {
         }
         </style>
 </head>
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 
 <div class="container-fluid">
     <div class="col-md-12">
@@ -48,7 +48,7 @@ if (!$appointmentResult) {
                 <div class="container-fluid">
                     <div class="row">
             <div class="col-md-12">
-                <h2 class="my-4">My Appointments</h2>
+                <h2 class="my-4" style="color: #1434A4;">My Appointments</h2>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>

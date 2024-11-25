@@ -40,7 +40,7 @@ include("include/connection.php");
     </style>
 </head>
 
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
     <div class="container-fluid position-absolute h-100">
         <div class="row">
             <div class="d-none d-md-block col-md-3" style="background-color: transparent;"></div>

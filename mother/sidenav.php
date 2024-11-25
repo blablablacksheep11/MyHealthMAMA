@@ -16,7 +16,7 @@
 
 <style>
 .bg-pink {
-    background-color: pink;
+    background-color: #89CFF0;
 }
 </style>
 

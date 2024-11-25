@@ -36,7 +36,7 @@ if (isset($_POST['change_uname'])) {
     </style>
 </head>
 
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
     
 
     <div class="container-fluid">
@@ -57,7 +57,7 @@ if (isset($_POST['change_uname'])) {
                         <div class="row">
                             <div class="col-md-6">
 
-                                <h5>My Profile</h5>
+                                <h5 style="color: #1434A4;">My Profile</h5>
                                 <form>
 
                                     <table class="table table-bordered">

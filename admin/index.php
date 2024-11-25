@@ -16,7 +16,7 @@ session_start();
         }
         </style>
 </head>
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 
     <?php
     include("../include/header.php");
@@ -36,7 +36,7 @@ session_start();
 </div>
 <div class="col-md-10">
 
-    <h4 class="my-2">Admin Dashboard</h4>
+    <h4 class="my-2" style="color: #1434A4;">Admin Dashboard</h4>
 
     <div class="col-md-12 my-1">
         <div class="row">
@@ -50,8 +50,7 @@ session_start();
                         $num = mysqli_num_rows($ad);
                         ?>
                         <h5 class="my-2 text-white" style="font-size: 30px;"><?php echo $num; ?></h5>
-                        <h5 class="text-white">Total</h5>
-                        <h5 class="text-white">Admin</h5>
+                        <h5 class="text-white">Total Admin</h5>
                 </div>
                 <div class="col-md-3">
                     <a href="admin.php"><i class="fa fa-user-cog fa-3x my-4" style="color: white;"></i></a>
@@ -72,8 +71,7 @@ session_start();
 
                         ?>
                         <h5 class="my-2 text-white" style="font-size: 30px;"><?php echo $num2; ?></h5>
-                        <h5 class="text-white">Total</h5>
-                        <h5 class="text-white">Doctors</h5>
+                        <h5 class="text-white">Total Doctors</h5>
                 </div>
                 <div class="col-md-3">
                     <a href="doctor.php"><i class="fa fa-user-md fa-3x my-4" style="color: white;"></i></a>
@@ -94,8 +92,7 @@ session_start();
 
                     ?>      
                         <h5 class="my-2 text-white" style="font-size: 30px;"><?php echo $num4; ?></h5>
-                        <h5 class="text-white">Total</h5>
-                        <h5 class="text-white">Nurses</h5>
+                        <h5 class="text-white">Total Nurses</h5>
                 </div>
                 <div class="col-md-3">
                     <a href="nurse.php"><i class="fa fa-user-nurse fa-3x my-4" style="color: white;"></i></a>
@@ -113,8 +110,7 @@ session_start();
 
                                             ?>
                         <h5 class="my-2 text-white" style="font-size: 30px;"><?php echo $num_mothers; ?></h5>
-                        <h5 class="text-white">Total</h5>
-                        <h5 class="text-white">Mothers</h5>
+                        <h5 class="text-white">Total Mothers</h5>
                 </div>
                 <div class="col-md-3">
                     <a href="mother.php"><i class="fa fa-female fa-3x my-4" style="color: white;"></i></a>
@@ -134,8 +130,7 @@ session_start();
                         
                         ?>  
                         <h5 class="my-2 text-white" style="font-size: 30px;"><?php echo $num3; ?></h5>
-                        <h5 class="text-white">Total Nurses</h5>
-                        <h5 class="text-white">Account Requests</h5>
+                        <h5 class="text-white">Nurses Account Requests</h5>
                 </div>
                 <div class="col-md-3">
                     <a href="nurse_request.php"><i class="fa fa-flag fa-3x my-4" style="color: white;"></i></a>
@@ -155,8 +150,7 @@ session_start();
                         
                         ?>
                         <h5 class="my-2 text-white" style="font-size: 30px;"><?php echo $num1; ?></h5>
-                        <h5 class="text-white">Total Doctor</h5>
-                        <h5 class="text-white">Account Requests</h5>
+                        <h5 class="text-white">Doctor Account Requests</h5>
                 </div>
                 <div class="col-md-4">
                     <a href="doctor_request.php"><i class="fa fa-newspaper fa-3x my-4" style="color: white;"></i></a>

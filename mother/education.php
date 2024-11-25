@@ -27,7 +27,7 @@ $motherUsername = $_SESSION['mother_username'];
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-image: url(/img/background1.jpg);
+            background-image: url(/img/background3.jpg);
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -59,7 +59,7 @@ $motherUsername = $_SESSION['mother_username'];
             </div>
             <div class="col-md-10">
                 <div class="container-fluid">
-                    <h2 class="my-4">Education Module - Mother Dashboard</h2>
+                    <h2 class="my-4" style="color: #1434A4;">Education Module - Mother Dashboard</h2>
 
                     <h3>Uploaded Videos:</h3>
                     <div class="row">

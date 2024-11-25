@@ -72,7 +72,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
         }
         </style>
 </head>
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 
 <div class="container-fluid">
     <div class="col-md-12">
@@ -84,7 +84,7 @@ while ($row = mysqli_fetch_assoc($doctorResult)) {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6">
-                            <h2 class="my-4">Appointment Management</h2>
+                            <h2 class="my-4" style="color: #1434A4;">Appointment Management</h2>
                             <form id="appointmentform" method="post">
                                 <div class="form-group">
                                     <label for="motherUsername">Select Mother</label>

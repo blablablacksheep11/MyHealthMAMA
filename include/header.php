@@ -50,7 +50,7 @@
 
 <style>
 .bg-pink {
-    background-color: pink;
+    background-color: #89CFF0;
 }   
 h6{
     left:550px;

@@ -34,10 +34,10 @@ if (isset($_POST['updatebutton'])) {
 <head>
         <title>MyHealthMAMA</title>
 </head>
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 <style>
         .footer {
-            background-color: pink;
+            background-color: #89CFF0;
             padding: 23px;
             color: white;
             text-align: center;

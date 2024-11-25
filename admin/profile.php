@@ -51,7 +51,7 @@ if (isset($_POST['change'])){
         }
     </style>
 </head>
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 
 <?php
 include("../include/header.php");
@@ -78,7 +78,7 @@ while ($row =mysqli_fetch_array($res)){
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4><?php echo $username; ?> Profile</h4>
+                            <h4 style="color: #1434A4;"><?php echo $username; ?> Profile</h4>
                             <?php 
                             if (isset($_POST['update'])){
                                 $profile = $_FILES['profile'];

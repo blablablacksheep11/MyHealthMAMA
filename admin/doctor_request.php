@@ -15,7 +15,7 @@ session_start();
         }
         </style>
 </head>
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 
     <?php
     include("../include/header.php");
@@ -31,7 +31,7 @@ session_start();
 
                 </div>
                 <div class="col-md-10">
-                    <h5 class="text-center">Doctor Account Request</h5>
+                    <h5 class="text-center" style="color: #1434A4;">Doctor Account Request</h5>
 
                     <div id="show"></div>
                 </div>

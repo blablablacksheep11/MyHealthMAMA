@@ -40,7 +40,7 @@ if (isset($_POST["update"])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .footer {
-            background-color: pink;
+            background-color: #89CFF0;
             padding: 10px;
             color: white;
             text-align: center;
@@ -52,7 +52,7 @@ if (isset($_POST["update"])) {
     </style>
 </head>
 
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 
     <?php include("../include/header.php"); ?>
     <div class="custom-container">

@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 
-<body style="background-image: url(img/background1.jpg);background-repeat:no-repeat; background-size:cover;">
+<body style="background-image: url(img/background3.jpg);background-repeat:no-repeat; background-size:cover;">
 
     <div class="container-fluid">
         <div class="col-md-12">
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                                <h2 class="my-4">Feedback Form</h2>
+                                <h2 class="my-4" style="color: #1434A4;">Feedback Form</h2>
                                 <form method="post">
                                     <div class="form-group">
                                         <label for="title">Select doctor:</label>
