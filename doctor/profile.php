@@ -26,7 +26,7 @@ if (isset($_POST['change_uname'])) {
 ?>
 <!DOCTYPE html>
 <head>
-    <title>PregnaCare +</title>
+    <title>MyHealthMAMA</title>
     <style>
         .footer {
             background-color: pink;

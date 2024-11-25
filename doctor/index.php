@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PregnaCare +</title>
+    <title>MyHealthMAMA</title>
     <style>
         .footer {
             background-color: pink;

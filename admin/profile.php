@@ -24,7 +24,7 @@ if (isset($_POST['change'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PregnaCare +</title>
+    <title>MyHealthMAMA</title>
     <style>
         .profile-pic-container {
             width: 250px;
